@@ -21,7 +21,7 @@ There are two salient "alternative" hypotheses the researchers found: One that t
 I give them a score from 1-5 of trustworthiness for each section.
 1. **Journal Reputation**: Published in PNAS, a highly respected scientific journal, and it's open access. **5**
 2. **Institutional Affiliations**: Nick Graetz, the lead author, was a Postdoctoral researcher at Princeton University at the time of writing, now affiliated with the University of Minnesota. The others were from Princeton University (Matthew himself! And I read his 400 page book, I do feel like I know him.), Rutgers University-Newark, and the United States Census Bureau. In the **Author Contributions** section in <small style="color: red">itty bitty</small> text (see picture below), other contributors associated with the US Census Bureau "S.R.P. and D.H.S. oversaw project administration and administrative data linkage." **3**, see conflict of interest below...
-     ![Information is presented smaller and smaller and smaller...](/assets/img/articledataunavailability.png)*The more important information for meta-analysis is presented smaller and smaller!*
+     ![Information is presented smaller and smaller and smaller...](https://ifenghm.github.io/beautiful-jekyll/assets/img/articledataunavailability.png)*The more important information for meta-analysis is presented smaller and smaller!*
 
 3. **Limitations**: The authors acknowledged potential limitations in their research, specifically noting "underreporting and incomplete eviction data" in their materials and methods section. **4**
 4. **Conflict of Interest?**: The authors declared no competing interests, **but** in their acknowledgements, they said this, "Any opinions and conclusions expressed herein are those of the authors and do not represent the views of the US Census Bureau." It's interesting that they decided to say this; maybe it's some government thing. Is the US Census Bureau supposed to have "views"? Honestly, there's so much data here, I want my government to have some views about how to help their suffering citizens at large, like me, uwu... (jk I'm not at threat for eviction) **3**
@@ -59,7 +59,7 @@ Trustability score: **3.7/5**, I kind of trust it, but I know nothing about IV d
 
 ... at a price. The [dataset](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/Y9TZQI) is publically available on Harvard's servers, but oof! All of these files are .do files, which means they are Stata files, and I don't have Stata. And Stata is statistics for non-coders (I'm better than that). And it costs a lot of money, especially if I'm not part of a university. Even if I work for the government it's $900 / year?? For working on tooling that's provided by the government? I'm really confused. Oh well, I'll try one more...
 
-![Stata costs](/assets/img/stata.png)*Stata costs $160 / year if I'm in education, $90 if I'm a student, but this is all at the UNIVERSITY level.*
+![Stata costs](https://ifenghm.github.io/beautiful-jekyll/assets/img/stata.png)*Stata costs $160 / year if I'm in education, $90 if I'm a student, but this is all at the UNIVERSITY level.*
 
 ## Article 3: Finally, Data Access! But... 
 
@@ -71,7 +71,7 @@ Actually, [Article 1](#article-1-confidential-data) cited this study as being pr
 
 1. **Journal Reputation**: Published in Sociological Science, I've never heard of this journal before, but I really liked their statement commitment to [reproducibility](https://sociologicalscience.com/reproducibility-policy/). Unfortunately, the policy only went into effect in 2023, and this is an older paper (published 2020, probably done in 2018), it doesn't have a reproducibility statement. But this paper in particular is awesome and makes all of its data AND code available! **5**
 
-![](/assets/img/ReproducibilityPolicy.png)
+![reproducibility policy](https://ifenghm.github.io/beautiful-jekyll/assets/img/ReproducibilityPolicy.png)
 
 2. **Institutional Affiliations**: The authors are from Rutgers and Princeton. But they all are part of the Eviction Lab. See conflicts of interest below. **4**
 3. **Limitations**: Guessing gender and race from only names is really prone to error. The authors did mention this, but they said they used "geolocation" also. **2** I'm not sure if I like this.
@@ -85,10 +85,10 @@ Trustability score: **3.5/5**,
 Finally, yes I can! The data is publically available on the [Eviction Lab's website](www.evictionlab.org/demographics-of-eviction-data), and I can download it and see if I can replicate the results. The raw data is provided and all the scripts for gender / race imputation are listed. It actually *works* when I run the R script, even though I don't understand R too well. 
 
 I needed an API key to get the Census data, and I went to the [census.gov](https://api.census.gov/data/key_signup.html) to get one. 
-![Census API key](/assets/img/CensusAPIKeyRequest.png)
+![Census API key]( https://ifenghm.github.io/beautiful-jekyll/assets/img/CensusAPIKeyRequest.png)
 
 But when I click the Request a Key button, I got an error. 
-![Census API key error](/assets/img/CensusAPIKeyerror.png)
+![Census API key error](https://ifenghm.github.io/beautiful-jekyll/assets/img/CensusAPIKeyRequest.png)
 
 Thankfully, the API key was left on the script. Here's a snippet (this is r code, which I don't know super well, but I know the arrows are left hand assignment, so acs and acs_hh are tables that are being saved).
 
