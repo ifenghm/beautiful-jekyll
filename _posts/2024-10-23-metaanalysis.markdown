@@ -47,7 +47,7 @@ This is a study that somehow found a causal link between [eviction and poverty i
 
 1. **Journal Reputation**: Published in the Quarterly Journal of Economics, a highly respected scientific journal. **5**
 2. **Institutional Affiliations**: The Authors are from Department of Economics in Notre Dame, Yale, UChicago. One of the writers now works at [Spotify](https://scholar.google.com/citations?user=IXsGHYQAAAAJ&hl=en&oi=ao) as a Data scientist after getting a PhD in public policy; what can I say, academia isn't glamorous. Also, it's interesting to see how long papers take to get published - there is a 2019 article talking about this research, and the research itself was published in 2023... **3**
-3. **Limitations**: They did talk about IV design and how it could solve the problem of maybe an unobserved variable that could be underlying both eviction and poverty, and not anything the American Census Bureau could have collected. I also feel like this is kinda p-hacky, in that they create a "financial health index" but then they later say "access to credit in the first", which is so much more specific than "financial health", it feels like they are fishing for **something** to say.* **2**
+3. **Data Limitations**: They did talk about IV design and how it could solve the problem of maybe an unobserved variable that could be underlying both eviction and poverty, and not anything the American Census Bureau could have collected. I also feel like the fact that they linked eviction court data and Census data as well as Labor data to create a bunch of "indices", is kinda p-hacky. For example, they create a "financial health index" but then they later say eviction is correlated to "access to credit in the first two years", which is so much more specific than "financial health"; it feels like they are fishing for **something** to say.* **2**
 4. **Conflict of Interest?**: The researchers didn't have an explicit section of this, but like the first paper, they used Census data and they also did the whole "Any opinions and conclusions expressed herein are those of the authors and do not represent the views of the US Census Bureau."  so I guess it's a legal formality to say this when you've gotten some extra help from the US Census Bureau. None of the authors seem to be directly working for the Bureau this time, but I think they needed to get approval for confidential information. **3.5**
 5. **Funding**: In the Footnote section, the authors "gratefully acknowledge financial support from the NSF..., the Laura and John Arnold Foundation, the Spencer Foundation, the Kreisman Initiative on Housing Law and Policy, the Horowitz Foundation for Social Policy, the Becker Friedman Institute, and the Tobin Center for Economic Policy." **5** I haven't heard of ANY of these foundations, which actually makes me appreciate these foundations even more.
 
@@ -82,7 +82,7 @@ Trustability score: **3.5/5**,
 
 ### Can I replicate this study? 
 
-Finally, yes I can! The data is publically available on the [Eviction Lab's website](www.evictionlab.org/demographics-of-eviction-data), and I can download it and see if I can replicate the results. The raw data is provided and all the scripts for gender / race imputation are listed. It actually *works* when I run the R script, even though I don't understand R too well. 
+Finally, yes I can! The data is publically available on the [Eviction Lab's website](https://www.evictionlab.org/demographics-of-eviction-data), and I can download it and see if I can replicate the results. The raw data is provided and all the scripts for gender / race imputation are listed. It actually *works* when I run the R script, even though I don't understand R too well. 
 
 I needed an API key to get the Census data, and I went to the [census.gov](https://api.census.gov/data/key_signup.html) to get one. 
 ![Census API key]( https://ifenghm.github.io/beautiful-jekyll/assets/img/CensusAPIKeyRequest.png)
@@ -131,4 +131,4 @@ acs %>%
 
 ## Conclusion
 
-It seems like **useful data** is kept confidential, and data that makes a lot of assumptions is what is available.
+I really liked seeing what data is collected for the US Census. All of the researchers used this US Census. As data gets more precise in quality, it gets more confidential and harder to access. I really appreciate the data transparency of earlier research although I "trust" the data collections the least - making assumptions about individual's race and gender is a HUGE assumption!
