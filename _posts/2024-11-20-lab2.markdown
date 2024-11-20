@@ -1,0 +1,106 @@
+---
+layout: post
+title: Sample Lab 2 World Bank Data Deep Dive
+subtitle: More data, more rejection of hypotheses
+thumbnail-img: /assets/img/housingthumb.png 
+# TODO: create another image
+cover-img: /assets/img/housingthumb.png
+---
+
+## World Bank Data API
+
+### Making API requests
+
+- The default data from the World Bank API comes in XML format. So I added the `format=json` parameter to the query string to get the data in JSON format. The default number of results per page is 50. To get more results, I added the `per_page=1000` parameter to the query string.
+- That doesn't guarantee I get full coverage though, so I wrote a recursive function that keeps making requests until it reaches the last page (using the `page=#` parameter) for a given indicator.
+  
+```python
+def get_world_bank_data(indicator, page=1):
+    # Make a GET request to the World Bank API to figure out how many pages there are
+    response = requests.get(f"{URL}/?format=json&page={page}&per_page=1000")
+    json = response.json()  # 0 is the metadata, 1 is the data
+    page_total = json[0]["pages"]
+    # load the data into classes
+
+    if page == page_total:
+        print(f"Last page for indicator {indicator} reached.")
+    else:
+        return get_world_bank_data(indicator, page + 1)
+```
+
+Lots of the data goes back to the 1940s, and there seems to be 294 "countries" (huh? I'll look into this later), so there are 23k data points.
+
+### Indicators
+
+There are over [24,000 indicators](https://datahelpdesk.worldbank.org/knowledgebase/articles/898599-indicator-api-queries) in the World Bank API. Holy smokes. After doing some preliminary checks, I wanted to focus on **Health** and **Wealth**, and if there was a relationship between the two.
+
+Health indicators:
+
+1. Pollution
+2. Immunizations
+3. Life expectancy
+
+Wealth indicators:
+
+1. GDP (per capita)
+2. [GINI index](https://data.worldbank.org/indicator/SI.POV.GINI?end=2023&most_recent_value_desc=true&start=1963&view=chart&year=2014)
+
+#### 1. Population vs GDP
+
+- 2.1k data points from 2000-2018
+- I chose to filter out for these years because I think COVID impacted GDP weirdly, and 2000 was indeed a bit arbitrary, but wanted to think about the modern era.
+- **Negative** relationship: As population increases, GDP goes down
+- NOT SIGNIFICANT
+- Need to filter out non-countries.
+
+When I hit the API
+```javascript
+{'p_value': 0.13304177872814615, 'slope': -1.917532148357356e-06}
+```
+
+Not only is the p-value not significant, but the slope is so small that it's not worth considering. It was helpful for me to learn how to filter out things using **pandas**. 
+
+```python
+# Filter out years between two values
+df['year'] = df['year'].astype(int)
+df = df[df['year'].between(2000, 2019)]
+```
+
+#### 2a. Population vs Air Pollution
+
+- 6k data points from 1990-2020, 30 yrs
+- The tiniest positive relationship
+
+P-value for independent variable:
+```javascript
+{'p_value': 1.3988810110276972e-14, 'slope': 3.3745206052782786e-09}
+```
+
+Even though the p-value is significant, the slope is so small that it's not worth considering there is a relationship.
+
+#### 2b. Pollution and Pollution Deaths
+
+Because I got a non-significant relationship between population and GDP, and the tiniest positive relationship between population and air pollution, I wanted to choose two indicators that would be much more obviously related and make sure this was significant. I chose pollution and pollution deaths. The maps looked pretty similar, so I was hoping for a strong relationship.
+
+![Pollution Deaths]({{ "/assets/img/unit2/pollution_deaths.png" | absolute_url }})
+![Air Pollution]({{ "/assets/img/unit2/pollution.png" | absolute_url }})
+
+Air pollution, measured in micrograms per cubic meter, was collected in the Global Burden of Disease Study from 1990-2019, with an indicator name of [EN.ATM.PM25.MC.M3](
+https://data.worldbank.org/indicator/EN.ATM.PM25.MC.M3?end=2020&most_recent_value_desc=true&start=1990&type=shaded&view=map)
+ 
+Pollution deaths [SH.STA.AIRP.P5](https://data.worldbank.org/indicator/SH.STA.AIRP.P5?end=2019&most_recent_value_desc=true&start=2019&type=shaded&view=map) was collected by the WHO and we only have 2019 data from 185 countries, so glad there was an overlap here.
+
+Yep, it is very clear that there is a relationship. For every 1 more microgram of air pollution per cubic meter, the mortality rate (per 100k people) due to air pollution increases by 2.4 people.
+
+```javascript
+{
+  "p_value": 5.731637386929833e-12,
+  "slope": 2.4370814184866205
+}
+```
+
+#### 2c. GDP vs Pollution
+
+I want to see if high GDP comes at a cost of high pollution.
+
+#### 3. Immunizations vs GDP
