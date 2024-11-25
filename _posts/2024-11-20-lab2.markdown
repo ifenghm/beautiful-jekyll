@@ -47,18 +47,18 @@ Wealth indicators:
 
 #### 1. Population vs GDP
 
-- 2.1k data points from 2000-2018
+- 1.5k data points from 2000-2018
 - I chose to filter out for these years because I think COVID impacted GDP weirdly, and 2000 was indeed a bit arbitrary, but wanted to think about the modern era.
-- **Negative** relationship: As population increases, GDP goes down
-- NOT SIGNIFICANT
-- Need to filter out non-countries.
+- **Negative** relationship: As population increases, GDP goes up
 
 When I hit the API
 ```javascript
-{'p_value': 0.13304177872814615, 'slope': -1.917532148357356e-06}
+{'p_value': 5.773159728050814e-14, 'slope': 4.714468621599472e-05}
 ```
 
-Not only is the p-value not significant, but the slope is so small that it's not worth considering. It was helpful for me to learn how to filter out things using **pandas**. 
+I removed outliers (countries with under 10 million pop and over 1 billion pop)
+The slope is so small that it's not worth considering that there is a relationship. 
+In any case though, it was helpful for me to learn how to filter out things using **pandas**. 
 
 ```python
 # Filter out years between two values
@@ -66,19 +66,34 @@ df['year'] = df['year'].astype(int)
 df = df[df['year'].between(2000, 2019)]
 ```
 
-#### 2a. Population vs Air Pollution
+#### 2. GDP and Life Expectancy
+
+Let's see if we can generate a significant relationship.
+I think there's an obvious relationship between "wealthier countries are healthier countries".
+We can prove that by calculating the difference between GDP and life expectancy. I think there is a positive relationship between the two.
+
+- There are 10k data points from 200 countries, from 1960-2020
+- **Positive** relationship: As GDP increases, life expectancy goes up (only by .00036 years though)
+
+```javascript
+{'p_value': 0.0, 'slope': 0.00036210467335729313}
+```
+
+This slope is again pretty small though it is better from the previous indicator. I want to generate some more obvious correlations to see if I can get a better slope.
+
+#### 3a. Population vs Air Pollution
 
 - 6k data points from 1990-2020, 30 yrs
 - The tiniest positive relationship
 
 P-value for independent variable:
 ```javascript
-{'p_value': 1.3988810110276972e-14, 'slope': 3.3745206052782786e-09}
+{'p_value': 0.0026544868824140977, 'slope': -2.3427729539272174e-08}
 ```
 
-Even though the p-value is significant, the slope is so small that it's not worth considering there is a relationship.
+Bleh again.
 
-#### 2b. Pollution and Pollution Deaths
+#### 3b. Pollution and Pollution Deaths
 
 Because I got a non-significant relationship between population and GDP, and the tiniest positive relationship between population and air pollution, I wanted to choose two indicators that would be much more obviously related and make sure this was significant. I chose pollution and pollution deaths. The maps looked pretty similar, so I was hoping for a strong relationship.
 
@@ -93,14 +108,59 @@ Pollution deaths [SH.STA.AIRP.P5](https://data.worldbank.org/indicator/SH.STA.AI
 Yep, it is very clear that there is a relationship. For every 1 more microgram of air pollution per cubic meter, the mortality rate (per 100k people) due to air pollution increases by 2.4 people.
 
 ```javascript
-{
-  "p_value": 5.731637386929833e-12,
-  "slope": 2.4370814184866205
-}
+{'p_value': 6.290745702131062e-12, 'slope': 2.4413200940047437}
 ```
 
-#### 2c. GDP vs Pollution
+#### 3c. Pollution and Life expectancy
 
-I want to see if high GDP comes at a cost of high pollution.
+I wanted to see if there was a relationship between pollution and life expectancy.
+There are nearly 6k data points here. There is a negative relationship, as I expected. 
+The more pollution, the life expectancy decreases by .21 years.
 
-#### 3. Immunizations vs GDP
+```javascript
+{'p_value': 0.0, 'slope': -0.2134299228149387}
+```
+
+#### 4. Immunizations vs Life expectancy
+
+I wanted to see if there was a relationship between immunizations and life expectancy.
+I thought there would be a positive relationship, unlike RFK Kennedy jr.
+
+These immunizations were for 3 diseases: HepB, Diptheria, and Measles. I just averaged them.
+
+```javascript
+{'p_value': 0.0, 'slope': 0.2847277540567132}
+```
+
+There is a slight positive relationship, and it's significant.
+For every 1% increase in immunization rates, life expectancy of a country increases by 0.28 years.
+The correlation is .66, which is the highest correlation so far. I'm not sure if I'm convincing anyone else in this class that vaccines are good, though.
+
+#### 5. GINI and Life Expectancy
+
+I have a suspicion that there is a negative relationship between GINI and life expectancy. 
+I think that the more unequal a country is, the lower the life expectancy.
+This is because even if the healthcare is good, the poor are not able to access that good healthcare.
+
+The GINI index doesn't seem to be as updated for that many countries, so there are only 2.1k data points here. 
+
+The GINI is a measure of from [0 to 100](https://databank.worldbank.org/metadataglossary/gender-statistics/series/SI.POV.GINI) where 0 implies perfect equality and 100 implies perfect inequality. 
+A measure of 100 would be if only 1 individual owned 100% of the income. 
+
+```javascript
+{'p_value': 0.0, 'slope': -0.32566992458381117}
+```
+
+So for the share of the income being more unequal by 1 point,
+life expectancy decreases by 0.3257 years.
+The correlation is -.36, which is not that strong though,
+so I think this may be due to outlier countries (high GINI, high life expectancy).
+Or maybe it's true that low GINI == high life expectancy, but high GINI == still some higher life expectancy as well,
+because richer people will live longer and increase life expectancy anyway. It could be some parabola-shaped relationship
+
+### Discussions, Doubts
+
+Surprisingly, I all had low p-values and therefore all these correlations are statistically significant.
+However, many of them had very small slopes, so they could be "spurious" correlations.
+I think the most convincing correlation was between immunizations and life expectancy, with a correlation of .66. 
+Of course, some of you may not know about correlation yet but we will learn about it soon! :) 
