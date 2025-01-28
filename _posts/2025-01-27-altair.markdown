@@ -1,0 +1,42 @@
+---
+layout: post
+title: Sample Altair Data Visualization
+subtitle: How to insert a vegalite chart into any webpage
+---
+
+Altair is a python wrapper around vega-lite. You can create a vega-lite chart in python and then export it to a json file. You can then use vega-embed to insert the chart into any webpage.
+
+## 1. Save your chart to a json file
+
+I assume you've already created a chart in Altair. Make sure you save your chart to a variable. 
+
+```python
+chart = alt.Chart(data).mark_point().encode(
+    # ... your channels here
+)
+```
+
+You can use the `to_json()` method to save your chart to a json file.
+
+```python
+chart.save('chart.json')
+```
+
+<head>
+  <!-- Import Vega & Vega-Lite (does not have to be from CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.31.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.23.0"></script>
+  <!-- Import vega-embed -->
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.29.0"></script>
+</head>
+<body>
+
+<div id="vis"></div>
+
+<script type="text/javascript">
+  var spec = "https://raw.githubusercontent.com/ifenghm/beautiful-jekyll/refs/heads/master/code/unit4/interactive_altair_us_employment.json";
+  vegaEmbed('#vis', spec).then(function(result) {
+    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+  }).catch(console.error);
+</script>
+</body>
