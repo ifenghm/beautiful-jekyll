@@ -22,6 +22,46 @@ You can use the `to_json()` method to save your chart to a json file.
 chart.save('chart.json')
 ```
 
+## 2. Upload the json file to your github repository
+
+You can upload the json file to your github repository. Make sure you get the raw link to the file. i.e., you click the 'raw' button so you're not viewing the file on github but rather just the text itself. For example, the github **website** link to my json is: [https://github.com/ifenghm/beautiful-jekyll/blob/master/code/unit4/interactive_altair_us_employment.json](https://github.com/ifenghm/beautiful-jekyll/blob/master/code/unit4/interactive_altair_us_employment.json) and the raw link to that same file is [https://raw.githubusercontent.com/ifenghm/beautiful-jekyll/refs/heads/master/code/unit4/interactive_altair_us_employment.json](https://raw.githubusercontent.com/ifenghm/beautiful-jekyll/refs/heads/master/code/unit4/interactive_altair_us_employment.json).
+
+## 3. Insert the chart into your webpage
+
+You can use the following code to insert the chart into your webpage, I found this code snippet from the [vega-embed github README](https://github.com/vega/vega-embed?tab=readme-ov-file#directly-in-the-browser). 
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Import Vega & Vega-Lite (does not have to be from CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@[VERSION]"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@[VERSION]"></script>
+  <!-- Import vega-embed -->
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@[VERSION]"></script>
+</head>
+<body>
+
+<div id="vis"></div>
+
+<script type="text/javascript">
+  var spec = "https://raw.githubusercontent.com/vega/vega/master/docs/examples/bar-chart.vg.json";
+  vegaEmbed('#vis', spec).then(function(result) {
+    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+  }).catch(console.error);
+</script>
+</body>
+</html>
+```
+
+1. Copy the above code into your blogpost. You don't need to copy the `<!DOCTYPE html>` and `</html>` tags (first and last lines) since your markdown file is already embedded in an html page.
+2. Please replace where you see `[VERSION]` with the version number of vega, vega-lite, and vega-embed that you want to use. As of this time of writing, you can use `5`, `5`, and `6` respectively.
+3. Replace the `spec` variable with the path to your json file.
+
+## 4. Profit!
+
+You should now see your chart in your webpage, and now that your chart is javascript-ified, people can interact with it!
+
 <head>
   <!-- Import Vega & Vega-Lite (does not have to be from CDN) -->
   <script src="https://cdn.jsdelivr.net/npm/vega@5.31.0"></script>

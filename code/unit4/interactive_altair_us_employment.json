@@ -13253,6 +13253,7 @@
       },
       "y": {
         "field": "employment",
+        "title": "employment (in 1000s)",
         "type": "quantitative"
       }
     },
