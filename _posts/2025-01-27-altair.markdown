@@ -40,7 +40,6 @@ You can use the following code to insert the chart into your webpage, I found th
   <!-- Import vega-embed -->
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@[VERSION]"></script>
 </head>
-<body>
 
 <div id="vis"></div>
 
@@ -50,11 +49,11 @@ You can use the following code to insert the chart into your webpage, I found th
     // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
   }).catch(console.error);
 </script>
-</body>
+
 </html>
 ```
 
-1. Copy the above code into your blogpost. You don't need to copy the `<!DOCTYPE html>` and `</html>` tags (first and last lines) since your markdown file is already embedded in an html page.
+1. Copy the above code into your blogpost. You don't need to copy the `<!DOCTYPE html>` and `</html>` tags (first and last lines) since your markdown file is already embedded in an html page. (I also stripped the <body> tag since you can't have more than one in an html document).
 2. Please replace where you see `[VERSION]` with the version number of vega, vega-lite, and vega-embed that you want to use. As of this time of writing, you can use `5`, `5`, and `6` respectively.
 3. Replace the `spec` variable with the path to your json file.
 
@@ -80,3 +79,5 @@ You should now see your chart in your webpage, and now that your chart is javasc
   }).catch(console.error);
 </script>
 </body>
+
+> NOTE: if you want to use a second chart, you need to create a new div with a unique id and then create a new script tag with a new spec variable. You can't have two charts in one document with the same id. Change both the `vis` objects in `div id="vis"` and `vegaEmbed('#vis', spec)` to `vis2`, or something.
