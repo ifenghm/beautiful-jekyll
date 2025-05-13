@@ -1,0 +1,92 @@
+---
+layout: post
+title: Racial Demographics of College Enrollment post-Affirmative Action (Draft)
+subtitle: this is just a draft lalala
+---
+
+## 1. Introduction
+
+The Supreme Court's [decision](https://www.supremecourt.gov/docket/docketfiles/html/public/20-1199.html) to end affirmative action in college admissions has sparked a national conversation about the future of diversity in higher education. Because I am a high school teacher, I am curious how students will not only be affected by this decision by the colleges themselves, but also how they might change their own college admissions process.
+
+From data following [high school graduates in 2013](https://cew.georgetown.edu/wp-content/uploads/cew-race_conscious_affirmative_action-fr.pdf), we know that White and Asian students are "overrepresented" in selective colleges, meaning that the number of high school graduates of those races is lower than the number of students who enroll in selective colleges. Black and Hispanic students are underrepresented. Race-conscious admissions policies were designed to help balance this out, following President Kennedy + LBJ in the 60s and 70s to use affirmative action in hiring people in government. 
+
+- [ ] Include Literature Review: California banned affirmative action in 1996, and the selective UCs saw a drop in Black and Hispanic students.
+
+## 2. Data
+
+I used [data](https://www.nytimes.com/interactive/2025/01/15/upshot/college-enrollment-race.html) from a New York Times article for this. They have more up to date data than the [IPEDS](https://nces.ed.gov/ipeds/use-the-data) data from the National Center for Education Statistics to collect data on college enrollment demographics, which releases data in January the year after the school year ends. Therefore, the latest data IPEDS has is from 2023, while NYT has collected data from 2024. They also reached out to some colleges for data, which is not available in the IPEDS data.
+
+### Limitations
+
+The New York Times even failed to collect data from over 25% of the colleges they deemed of interest (listed as selective or otherwise top colleges). Also, only 59 colleges report their data in the federal government data formatted. 
+
+## 3. Differences from 2022 to 2024
+
+I used Seaborn to draw a violin plot comparing the changes in Black, Hispanic, Asian, and White enrollment from 2022 to 2024.
+
+![college violin]({{ "/assets/img/final/college_overview.png" | absolute_url }})
+
+The chart shows very slight differences in the means of the enrollment demographics, but there are some differences in the "modes" of the data. The White population has a higher mode than the other races, just above 2%, while the Black, Hispanic, and Asian populations are hovering around 0%. The Black change in enrollment mode is clearly the most negative, though only slightly. The Black and Hispanic distributions do seem more skewed left, the Asian distribution was skewed right (we will look at that in a second), and the White percentage changes have a much larger range overall than the others, with a more subtle skew.
+
+What I can say is that the colleges are all responding pretty differently to the Supreme Court ruling.
+
+### 3a. Case Studies - Johns Hopkins University
+
+To better look at the landscape of the data, I created bubble charts showing the distribution of the enrollments of the colleges for each race. The size of the bubble represents the percentage of the population for that race enrolled at that college, and the location of the bubble in the x-axis represents the *% CHANGE* of that race from 2022 to 2024. It was interesting to visualize the outliers that way.
+
+Johns Hopkins University is one of the schools that had the most drastic change in enrollment demographics. The Black population dropped 7.3% overall (to 4%). The Hispanic population dropped **12 points** overall (to 11%), the single largest drop in all colleges in the data set for all demographics. The White population increased 4% (to 21%), and the Asian population increased **14%** (to 41%), the single largest increase in all colleges in the data set.
+
+### 3b. Georgetown University
+
+Georgetown University also had big changes in enrollment, in the opposite direction. The Black population did not change (stayed at 5%), while the Hispanic population increased 5% to 11%, the White population decreased nearly 11% (to 43%), and the Asian population decreased 6%, to 17%. 
+
+<div class="flourish-embed flourish-bubble-chart" data-src="visualisation/23018023"><script src="https://public.flourish.studio/resources/embed.js"></script><noscript><img src="https://public.flourish.studio/visualisation/23018023/thumbnail" width="100%" alt="bubble-chart visualization" /></noscript></div>
+
+<div class="flourish-embed flourish-bubble-chart" data-src="visualisation/23018081"><script src="https://public.flourish.studio/resources/embed.js"></script><noscript><img src="https://public.flourish.studio/visualisation/23018081/thumbnail" width="100%" alt="bubble-chart visualization" /></noscript></div>
+
+<div class="flourish-embed flourish-bubble-chart" data-src="visualisation/23017447"><script src="https://public.flourish.studio/resources/embed.js"></script><noscript><img src="https://public.flourish.studio/visualisation/23017447/thumbnail" width="100%" alt="bubble-chart visualization" /></noscript></div>
+
+<div class="flourish-embed flourish-bubble-chart" data-src="visualisation/23017966"><script src="https://public.flourish.studio/resources/embed.js"></script><noscript><img src="https://public.flourish.studio/visualisation/23017966/thumbnail" width="100%" alt="bubble-chart visualization" /></noscript></div>
+
+### 3c. Discussion
+Though this looks like Johns Hopkins is a "bad" college and Georgetown is a "good" one in terms of maintaining diversity, but Georgetown had a very high white population before the end of affirmative action and still has one after; the percentage of White students at Johns Hopkins is almost half of Georgetown's. Both colleges mention that race is used as one of many factors in their holistic admissions process, so how did their change in enrollment so disparate?  
+
+<!-- Research Section -->
+Johns Hopkins had a pretty diverse population BEFORE the Supreme Court ruling and were most likely utilizing race conscious admissions policies to get there. And though one could argue that Johns Hopkins is "doing" the opposite of promoting diversity, I think they just did not adjust their admissions process after race was removed as a consideration. 
+- [ ] Research Johns Hopkins University process changes after affirmative action ([or possibly lack thereof?](https://hub.jhu.edu/2024/09/19/johns-hopkins-demographic-makeup-scotus-ruling/)) -- yes; and even using socioeconomic status for diversification...
+   - "The percentage of students from low-income backgrounds, measured by eligibility for federal Pell grants, rose to 23.8%, Hopkins' highest percentage to date. The percentage of first-generation college students rose from 19.4% to 20.3%. The percentage of students who are first-generation or low-income is 30.2%."
+
+I know that Duke University found other ways around the Supreme Court ruling to keep promoting [diversity](https://www.vox.com/policy/370854/affirmative-action-black-enrollment-universities-diversity-supreme-court) by waiving admissions fees for low-income and native North Carolinian students. Duke unfortunately does not report their data in the federal standardized way, but the New York Times article reports that from 2023-2024, which is a different year range than my previous results were made on, Black population stayed the same (14%), the Hispanic population increased 1% (to 13%), the White population decreased 1% (to 52%), and their Asian population decreased 6% (to 29%). I think offering financial aid to students is a good example of how colleges are trying to keep their diversity numbers up (if the colleges can afford it).
+
+**Georgetown** 
+
+- [holistic](https://thehoya.com/news/gu-admits-fewer-students-of-color-in-first-post-affirmative-action-class)
+- [reach out and FAFSA delays](https://www.georgetown.edu/news/get-to-know-the-class-of-2028-at-georgetown/)
+- "In light of the Supreme Court’s decision, Georgetown worked steadily to reach out to admitted students from a wide variety of backgrounds to encourage their enrollment following their admission."
+- Georgetown Scholars Program 5 week pre-orientation program for first-gen students
+
+Colleges should be doing more to mirror the diverse population of students who graduate from high school in America. And if they have to do that through less direct ways like waiving admissions fees for low-income students, and pre-orientation / welcome programs, then the colleges that can afford to do that definitely should.
+
+#### Looking further up the chain
+
+After thinking about how Duke University has been able to promote more diversity by incentivizing low-income students to apply, I realized we have to look at ADMISSIONS DATA, not just ENROLLMENT DATA. I **got** (TODO: need to look still) admissions data from IPEDS which unfortunately only has data from 2023.
+** limitation: Also, I do know that the race itself is hard to measure. I completely ignored the "multiracial" category, which still makes up a significant portion of the population.
+
+NOTE: I'm going to have to do more data crunching here, but I am looking to conclude that removing race-consciousness during admissions is not just impacting the enrollment numbers but also the admissions numbers. Are students self-selecting to schools that historically have a higher representation of their race? Then, it does not matter what the colleges do. 
+-- Common App [data](https://www.commonapp.org/files/Common-App-Race-Ethnicity-SCOTUS-2024.pdf) shows no change in number of applications in selective colleges. 
+-- Then there is probably 
+-- The real work is in the reachout programs.
+
+Conclusion: College demographics ARE changing because of the Supreme Court ruling, and colleges should spend their efforts reaching out to their admitted students and make them feel they belong if they want to keep recruiting diverse students. 
+
+### 4. Results
+
+Code that parses new york times to calculate % change over time [here](https://raw.githubusercontent.com/ifenghm/beautiful-jekyll/refs/heads/master/code/unit4/parse_college_race_data.ipynb).
+
+### 5. Things I Still Need to Do
+
+- [ ] Include unique line chart for Johns Hopkins University enrollment for different races over time
+- [ ] Data: Include admissions and application changes in colleges
+- [ ] Create identical bubble charts for admissions change
+- [ ] Find more case studies from the bubble charts for admissions changes- repeat research for specific colleges
+- [ ] Data: Socioeconomics x class (Pell Grants)
